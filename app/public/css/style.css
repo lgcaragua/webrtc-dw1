@@ -5,31 +5,31 @@ body{
 	background: #f1f1f1;
 	color: #868686; 
 	font-family: "Open Sans", Helvetica, sans-serif, arial; 
-	font-size: 18px; /* 18px ÷ 16px = 1.125em */
+	font-size: 18px;
 	font-weight: 300;
-	line-height: 1.2222222222em; /* 22px ÷ 18px = 1.22222222222em*/
+	line-height: 1.2222222222em;
 	text-align: left; 
 	text-shadow: 1px 1px 0px #fff; 
 }
 
 h1, h2{
 	color: #FE5E41;
-	font-size: 3.3333333333em; /* 60px ÷ 18px = 3.3333333333em */
+	font-size: 3.3333333333em;
 	font-weight: 800;
-	letter-spacing: -0.05em; /* -3px ÷ 60px = -0.05em */
-	line-height: 1em; /* 60px ÷ 60px = 1em */
+	letter-spacing: -0.05em;
+	line-height: 1em;
 	margin: 20px 0 15px 0;
 }
 h3{
-	font-size: 1.7777777778em; /* 32px ÷ 18px = 1.7777777778em */
+	font-size: 1.7777777778em;
 	font-weight: 300;
-	letter-spacing: -0.0625em; /* -2px ÷ 32px = -0.0625em */
-	line-height: 1.1875em; /* 38px ÷ 32px = 1.1875em */
+	letter-spacing: -0.0625em;
+	line-height: 1.1875em;
 }
 
 p{
 	font-weight: 300;
-	letter-spacing: -0.05555555556em; /* -1px ÷ 18px = -0.05555555556em */
+	letter-spacing: -0.05555555556em;
 }
 a, a:link, a:visited{
 	color:#FE9380; 
@@ -48,7 +48,7 @@ header- cabecalho da pagina
 	header{
 		border-bottom: 1px solid #E0E0E0; 
 		height: 110px;
-		width: 100%; /*1200px ÷ 1200px = 1 x 100 = 100%*/
+		width: 100%;
 	}
 
 	/* nav - menu de navegação */
@@ -56,7 +56,7 @@ header- cabecalho da pagina
 		float: right;
 		margin-top: 50px; 
 		text-align: right; 
-		width: 41.6666666666667%; /* 500px ÷ 1200px = 0.416666666666667 x 100 = 41.6666666666667%*/
+		width: 41.6666666666667%;
 	}
 	nav ul{
 		list-style-type:none; 
@@ -65,107 +65,96 @@ header- cabecalho da pagina
 		display: inline; 
 	}
 	nav ul li a{
-		margin-right: 2.5%; /* 30px ÷ 1200px = 0.025 x 100 = 2.5%*/
+		margin-right: 2.5%;
 	}
 	nav a:link, nav a:visited{
 		color:#999;
-		font-size: 1.2222222222em; /* 22px ÷ 18px = 1.2222222222em */
+		font-size: 1.2222222222em; 
 		font-weight: 300;
-		letter-spacing: -0.0909090909em; /* -2px ÷ 22px = -0.0909090909em */
-		line-height: 1.18181818182em; /* 26px ÷ 22px = 1.18181818182em */
+		letter-spacing: -0.0909090909em;
+		line-height: 1.18181818182em;
 		display:inline-block;
 	}
 	nav a.ativo:link, nav a:hover{
 		color:#FE9380; 
 	}
 
-/*----------------------------------------------------------
-Seção .CHAMADA <<<<<========================================
-----------------------------------------------------------*/
+/* ---------------------------------------------------
+Chamada
+----------------------------------------------------- */
 .chamada{
 	height: 150px;
 	text-align:center;
-	width:100%; /*1200px ÷ 1200px = 1 x 100 = 100%*/
+	width:100%;
 }
 h2 span{
-	font-size: 1em; /* 60px ÷ 60px = 1em */
+	font-size: 1em;
 	font-weight: 300;
-	letter-spacing: -0.0333333333em; /* -2px ÷ 60px = 0.0333333333em */
-	line-height: 1em; /* 60px ÷ 60px = 1em */
+	letter-spacing: -0.0333333333em;
+	line-height: 1em;
 }
 .chamada h3 {
 	margin: 0 auto;
-	width:75%; /* 900px ÷ 1200px = 0.75 x 100 = 75%*/
+	width: 75%;
 }
 
-/*----------------------------------------------------------
-Seção .CONTAINER - Conteúdo com 3 colunas <<<<<=============
-----------------------------------------------------------*/
+/* ---------------------------------------------------
+Container
+----------------------------------------------------- */
 .container{
-	background-color:#FE9481;
+	background-color: #FE9481;
 	height: 417px;
-	padding:2.5%; /* 30px ÷ 1200px = 0.025 x 100 = 2.5%*/
-	width:95%; /* 1200px ÷ 1200px = 1 x 100 = 100% .:. 100% - 5.0% de padding (direita e esquerda) = 95%*/
-	border:solid 1px;
+	padding: 2.5%;
+	width: 95%;
+	border: solid 1px;
 }
-/*
-=========================
-formatação do texto
-=========================
-*/
 .container h3{
 	color:#fff;
-	font-size: 1.77777777778em; /* 32px ÷ 18px = 1.77777777778em */
+	font-size: 1.77777777778em;
 	font-weight: 300;
-	letter-spacing: -0.0625em; /* -2px ÷ 32px = 0.0625em */
+	letter-spacing: -0.0625em;
 	margin-bottom: 30px;
-	text-shadow:none;
+	text-shadow: none;
 }
 .container p{
 	text-align:justify;
 }
-
-/*----------------------------------------------------------
-Seção FOOTER - Rodape com 2 colunas <<<<<===================
-----------------------------------------------------------*/
+/* ---------------------------------------------------
+Footer
+----------------------------------------------------- */
 footer{
 	clear:both;
 	height: 50px;
 	padding: 10px 0;
-	width:100%; /* 1200px ÷ 1200px = 1 x 100 = 100%*/
+	width:100%;
 }
 .copyright{
 	float:left;
-	margin-left: 2.5%; /* 30px ÷ 1200px = 0.025 x 100 = 2.5%*/
+	margin-left: 2.5%;
 }
 
-/*----------------------------------------------------------
-Media Queries <<<<<=========================================
-----------------------------------------------------------*/
-
-/* 
-1200px – Desktops, notebooks com monitores widescreen
-***********************************************************/
+/* ---------------------------------------------------
+Media Queries
+----------------------------------------------------- */
+/*  1200px */
 @media screen and (max-width: 1200px){
 	.chamada h3 {
-		font-size: 1.66666666667em; /* 30px ÷ 18px */
+		font-size: 1.66666666667em;
 	}
 	.container h3{
-		font-size: 1.55555555556em; /*  28px ÷ 18px */
+		font-size: 1.55555555556em;
 	}
 	.container p{
 
 	}
 }
-/* 
-960px – Tablets no formato paisagem e alguns monitores mais antigos
-***********************************************************/
+/* 960px */
 @media screen and (max-width:960px){
 	nav{
-		width:62.5%; /* 600px ÷ 960px */
+		width:62.5%;
 	}
 	h2{
-		font-size:2.6666666667em; /*48px ÷ 18px*/
+		font-size:2.6666666667em;
 		margin: 20px 0 15px 0;
 	}
 /*.chamada*/
@@ -173,26 +162,24 @@ Media Queries <<<<<=========================================
 		height: 120px;
 	}
 	.chamada h3{
-		font-size:1.5em; /*27px ÷ 18px*/
-		width:88.54166666666667%; /*850px ÷ 960px*/
+		font-size:1.5em;
+		width:88.54166666666667%;
 	}
 /*.container*/
 	.container{
 		height: 425px;
-		padding:3.125%; /* 30px ÷ 960px */
-		width:93.75%; /* 100% (960px) - 6.25% de padding (direita e esquerda) = 92.1875%*/
+		padding: 3.125%;
+		width: 93.75%;
 	}
 	.container h3{
-		font-size: 1.6666666667em; /*30px ÷ 18px*/
+		font-size: 1.6666666667em;
 	}
 	.container p{
-		font-size: 0.8333333333em; /*15px ÷ 18px*/
+		font-size: 0.8333333333em;
 		top: 230px;
 	}
 }
-/* 
-768px – Tablets no formato retrato, como o iPad
-***********************************************************/
+/* 768px */
 @media screen and (max-width:768px){
 /*cores dos links e H2*/
 	h2, a, a:link, a:visited{
@@ -219,33 +206,31 @@ Media Queries <<<<<=========================================
 		height:100px;
 	}
 	h2 {
-		font-size: 2.2222222222em; /*40px ÷ 18px*/
+		font-size: 2.2222222222em;
 	}
 	.chamada h3{
-		font-size:1.1111111111em; /*20px ÷ 18px*/
+		font-size:1.1111111111em; 
 	}
 /*.container*/
 	.container{
 		background-color:#FCDA92;
 		height: 380px;
-		padding:3.90625%; /* 30px ÷ 768px = 0.025 x 100 = 2.5%*/
-		width:92.1875%; /* 100% (768px) - 7.8125% de padding (direita e esquerda) = 92.1875%*/
+		padding:3.90625%;
+		width:92.1875%;
 	}
 	.container h3{
-		font-size: 1.6666666667em; /*30px ÷ 18px*/
+		font-size: 1.6666666667em;
 	}
 	.container p{
-		font-size: 0.7777777778em; /*14px ÷ 18px*/
+		font-size: 0.7777777778em;
 		height:140px;
-		line-height: 1.1428571428em; /*16px ÷ 14px*/
-		padding: 2.9166666667%; /* 7px ÷ 240px */
+		line-height: 1.1428571428em;
+		padding: 2.9166666667%;
 		top: 215px;
 	}
 }
 
-/* 
-480px – Smartphones no formato paisagem com tela pequena
-***********************************************************/
+/* 480px  */
 @media screen and (max-width:480px){
 /*Geral*/
 	*{
@@ -283,7 +268,7 @@ Media Queries <<<<<=========================================
 	}
 	nav li a:link{
 		color:#fff;
-		font-size:1.3888888889em; /*25px ÷ 18px*/
+		font-size:1.3888888889em;
 	}
 	nav li a.ativo:link, nav li a:hover, nav li a:visited {
 		background-color:#745F9A; 
@@ -299,12 +284,12 @@ Media Queries <<<<<=========================================
 		margin-top:25px;
 	}
 	h2 {
-		font-size: 1.4444444444em; /*26px ÷ 18px*/
-		letter-spacing:-0.0769230769230769em; /*2px ÷ 26px*/
+		font-size: 1.4444444444em;
+		letter-spacing:-0.0769230769230769em;
 		margin-bottom: 15px;
 	}
 	.chamada h3{
-		font-size:0.7777777778em; /*14px ÷ 18px*/
+		font-size:0.7777777778em;
 	}
 /*.container*/
 	.container{	
