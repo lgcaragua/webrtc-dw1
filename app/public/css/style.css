@@ -86,6 +86,66 @@ header- cabecalho da pagina
 	}
 
 /* ---------------------------------------------------
+Chat
+----------------------------------------------------- */
+.chat {
+	display: table;
+}
+
+.chat aside {
+	background-color: #fff;
+	padding: 0;
+}
+.chat aside ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;	
+}
+
+.chat aside ul li:last-child {
+	border-bottom: 0px;
+}
+
+.chat aside ul li {
+	border-bottom: #191919 1px solid;
+}
+
+.chat aside a {
+	display: block;
+	padding: 3px 0;
+	width: 250px;
+	text-decoration: none;
+	color: #000;	
+}
+
+.chat aside a:hover, .chat aside a.ativo {
+	background-color: #999;
+}
+
+.chat aside {
+	float:left;
+}
+
+.chat content {
+	float:right;
+}
+
+.chat .msg p {
+	font-family: 'Verdana';
+}
+
+.chat .msg p.self {
+	text-align: right;
+	color: #868686;
+}
+
+.chat .msg p.remote {
+	text-align: left;
+	color: #000;
+}
+
+
+/* ---------------------------------------------------
 Chamada
 ----------------------------------------------------- */
 .chamada{

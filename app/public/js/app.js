@@ -9,6 +9,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	})
 	.state('chat', {
 		url: '/chat/',
+		templateUrl: 'views/chat.html',
+		controller: 'chatCtrl',
 		templateUrl: 'views/chat.html'
 	})
 	.state('tecnologia', {
@@ -21,8 +23,28 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	});
 }]);
 
-app.controller('mainCtrl', ['$scope','$state', function($scope, $state) {	
-	$scope.usuario = {};
+app.controller('mainCtrl', ['$scope', '$state', function($scope, $state) {
+	$state.go('home');
+}]);
+
+app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
+	$scope.list = ['Rogério', 'Gustavo', 'Noboru San', 'Adalberto', 'Kellen'];
+	$scope.conversas = {};
+	$scope.list.forEach( function (contato) {
+		$scope.conversas[contato] = [
+			{text:'Oi tudo bem ? aqui é o '+contato, quem:'remote'}
+		];
+	});		
+	
+	$scope.selContato = function(contato) {
+		$scope.contatoAtivo = contato;
+	};
+	
+	$scope.enviaMsg = function() {		
+		$scope.conversas[$scope.contatoAtivo].push({text:$scope.chatMsg, quem:'self'});
+		$scope.chatMsg = "";				
+	};			
+	$scope.usuario = {};	
 	$scope.peer = null;		
 	var viewPath = 'views/';
 	$scope.route =  viewPath+'login.html';
