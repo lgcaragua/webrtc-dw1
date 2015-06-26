@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts"/>
-var app = angular.module('webrtc', ['ui.router', 'ngAnimate']);
+var app = angular.module('webrtc', ['luegg.directives','ui.router', 'ngAnimate']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 	$stateProvider
@@ -40,9 +40,8 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		if ($scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo].unread = 0;
 	};
 	
-	$scope.enviaMsg = function() {
-		if (!$scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo] = {msgs:[]};		
-		$scope.conversas[$scope.contatoAtivo].msgs.push({text:$scope.chatMsg, quem:'self'});
+	$scope.enviaMsg = function() {				
+		$scope.addMsg($scope.contatoAtivo, {text:$scope.chatMsg, quem:'self'});
 		socket.emit('chat', JSON.stringify({
 			de:$scope.userLogin,
 			para:$scope.contatoAtivo,
@@ -63,12 +62,16 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		$scope.error = msg;
 	};
 		
+	$scope.addMsg = function(contato, msg) {
+		if (!$scope.conversas[contato]) 
+			$scope.conversas[contato] = {msgs:[]};		
+		$scope.conversas[contato].msgs.push(msg);		
+	};		
 	
 	
 	socket.on('chat', function(data) {
 		var msg = JSON.parse(data);
-		if (!$scope.conversas[msg.de]) $scope.conversas[msg.de] = {msgs: []};
-		$scope.conversas[msg.de].msgs.push({text:msg.text,quem:'remote'});
+		$scope.addMsg(msg.de, {text:msg.text, quem:'remote'});
 		if ($scope.contatoAtivo !== msg.de)
 			$scope.conversas[msg.de].unread ? $scope.conversas[msg.de].unread++ : $scope.conversas[msg.de].unread = 1;
 		msgAudio.play();
@@ -125,6 +128,13 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 			socket.emit('chamada', JSON.stringify({para: $scope.peer, bye:true, dados: {de:$scope.usuario.nome}}));	
 			$scope.isInCall = false;
 			$scope.isCaller = false;														
+	};
+	
+	$scope.msgOnKey = function(event) {
+		if (event.keyCode === 13 && !event.shiftKey) {
+			event.preventDefault();
+			if ($scope.chatMsg) $scope.enviaMsg();			
+		}
 	};
 	
 	function setAudio(audio) {

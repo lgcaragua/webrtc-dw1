@@ -89,12 +89,18 @@ header- cabecalho da pagina
 Chat
 ----------------------------------------------------- */
 	.chat {
-		display: table;
+		position: relative;
+		width: 100%;
+		height: 25em;
 	}
 
 	.chat aside {
+		position: absolute;
+		left: 0px;
 		background-color: #fff;
 		padding: 0;
+		height: 100%;
+		width: 20%;
 	}
 	.chat aside ul {
 		list-style-type: none;
@@ -112,8 +118,7 @@ Chat
 
 	.chat aside a {
 		display: block;
-		padding: 3px 0;
-		width: 250px;
+		padding: 3px 0;		
 		text-decoration: none;
 		color: #000;	
 	}
@@ -122,16 +127,26 @@ Chat
 		background-color: #999;
 	}
 
-	.chat aside {
-		float:left;
-	}
-
 	.chat content {
-		float:right;
+		position: absolute;
+		right: 0px;
+		height: 100%;
+		width: 75%;
+	}
+	
+	.chat .msg {
+		display: inline-block;
+		width: 100%;
+		height: 80%;
+		overflow-y: auto;		 
+		vertical-align: text-bottom;
 	}
 
 	.chat .msg p {
 		font-family: 'Verdana';
+		margin: 8px 15px;
+		vertical-align: bottom;
+		word-wrap: break-word;
 	}
 
 	.chat .msg p.self {
@@ -144,6 +159,13 @@ Chat
 		color: #000;
 	}
 	
+	
+	.chat textarea {
+		height: 10%;
+		width: 100%;
+		position: absolute;
+		bottom: 0px;
+	}
 	.badge {
 	  display: inline-block;
 	  min-width: 10px;

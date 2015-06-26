@@ -1,8 +1,10 @@
-<div class="content">
+
 	<section class="login" ng-hide="usuario">
 		<h3>Logar como</h3>
-		<input type="text" ng-model="userLogin">
-		<button ng-click="login()">Entrar</button>
+		<form>
+			<input type="text" ng-model="userLogin">
+			<button type="submit" ng-click="login()">Entrar</button>
+		</form>
 		<p ng-show="loginError">{{loginError}}</p>
 	</section>
 	<section class="chat" ng-show="usuario">
@@ -16,14 +18,13 @@
 			</ul>
 		</aside>
 		<content>
-			<div class="msg">
-				<p ng-repeat="msg in conversas[contatoAtivo].msgs" class="{{msg.quem}}">{{msg.text}}</p>
+			<div id="msg" class="msg" scroll-glue>
+				<p ng-repeat="msg in conversas[contatoAtivo].msgs" class="{{msg.quem}}">{{msg.quem === 'self' ? 'Você' :contatoAtivo}} disse: {{msg.text}}</p>
 			</div>
-			<textarea  ng-disabled="!contatoAtivo" ng-model="chatMsg" cols="80" rows="5"></textarea>
+			<textarea ng-keypress="msgOnKey($event)"  ng-disabled="!contatoAtivo" ng-model="chatMsg"></textarea>
 			<button  ng-disabled="!contatoAtivo || !chatMsg" ng-click="enviaMsg()">Enviar</button>
 			<button ng-click="call(contatoAtivo)" ng-disabled="!contatoAtivo" ng-hide="isInCall || peer">Ligar</button>
 			<button ng-click="desligar()" ng-show="isInCall || peer">Desligar</button>
 			<button ng-click="atender()" ng-show="peer && !isCaller">Atender</button>
 		</content>
 	</section>
-</div>
