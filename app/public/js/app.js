@@ -10,6 +10,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	.state('chat', {
 		url: '/chat/',
 		templateUrl: 'views/chat.html'
+	})
+	.state('tecnologia', {
+		url: '/tecnologia/',
+		templateUrl: 'views/tecnologia.html'
 	});
 }]);
 

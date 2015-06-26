@@ -27,6 +27,13 @@ h2{
 	line-height: 1.1875em;
 }
 
+h3{
+	color: #990000;
+	font-size: 1.5em;
+	font-weight: 200;
+	letter-spacing: -0.07em;
+}
+
 p{
 	font-weight: 300;
 	letter-spacing: -0.05555555556em;
@@ -40,7 +47,6 @@ a, a:link, a:visited{
 a:hover{
 	color: #E62E00;
 	text-decoration: underline;
-
 }
 
 /* ---------------------------------------------------
@@ -51,13 +57,11 @@ header- cabecalho da pagina
 		height: 110px;
 		width: 100%;
 	}
-
 	/* nav - menu de navegação */
 	nav{
 		float: right;
 		margin-top: 50px; 
 		text-align: right; 
-		border: solid 1px;
 		width: 100%;
 	}
 	nav ul{
@@ -65,7 +69,6 @@ header- cabecalho da pagina
 	}
 	nav li {
 		display: inline; 
-
 	}
 	nav ul li a{
 		margin-right: 2.5%;
@@ -92,14 +95,12 @@ Chamada
 }
 h1{
 	white-space: nowrap;
-	
 }
 h1 span{
 	font-size: 1em;
 	font-weight: 300;
 	letter-spacing: -0.0333333333em;
 	line-height: 1em;
-	
 }
 .chamada h2 {
 	color: #868686;
@@ -112,11 +113,9 @@ Container
 ----------------------------------------------------- */
 .container{
 	background-color: #F8C0B2;
-
 	padding: 2.5%;
 	width: 95%;
 	border: 1px solid #E0E0E0; 
-
 }
 .container h2{
 	color:#fff;
@@ -149,8 +148,11 @@ Media Queries
 /*  1200px */
 @media screen and (max-width: 1200px){
 	h1{
-		font-size:2.6666666667em;
+		font-size: 2.6666666667em;
 		margin: 20px 0 15px 0;
+	}
+	.chamada {
+		height: 130px;
 	}
 	.chamada h2 {
 		font-size: 1.66666666667em;
@@ -160,18 +162,16 @@ Media Queries
 	}
 	
 }
+
 /* 960px */
 @media screen and (max-width:960px){
-	nav{
-		width:62.5%;
-	}
 	h1{
 		font-size:2.6666666667em;
 		margin: 20px 0 15px 0;
 	}
 /*.chamada*/
 	.chamada {
-		height: 150px;
+		height: 130px;
 	}
 	.chamada h2{
 		font-size:1.5em;
@@ -190,12 +190,17 @@ Media Queries
 		top: 230px;
 	}
 }
+
 /* 768px */
 @media screen and (max-width:768px){
 /*cores dos links e h1*/
 	h1, a, a:link, a:visited{
 		color:#FBCA61; 
 	}	
+	h3{
+		color: #CC7A00;
+		font-size: 1.25em;
+	}
 	a:hover{
 		color:#F9AD0F;
 	}
@@ -208,6 +213,9 @@ Media Queries
 		float:none;
 		text-align:center;
 		width: 100%;
+	}
+	nav a:link, nav a:visited{
+		font-size: 1em; 
 	}
 	nav a.ativo:link, nav a:hover{
 		color:#FBCA61; 
@@ -247,6 +255,10 @@ Media Queries
 /*cores dos links e h1*/
 	h1 {
 		color: #246B47; 
+	}
+	h3{
+		color: #195043;
+		font-size: 1.1em;
 	}
 /*header*/	
 	header {
@@ -300,7 +312,7 @@ Media Queries
 	.container{	
 		background-color: #70B894;
 		margin:0;
-		padding:0;
+		padding: 5px 0 5px 0 ;
 		width:100%;
 	}
 	.container p{
