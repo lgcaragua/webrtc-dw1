@@ -8,15 +8,22 @@
 	<section class="chat" ng-show="usuario">
 		<aside>
 			<ul>
-				<li ng-repeat="user in list"><a ng-click="selContato(user)" ng-class="{'ativo': contatoAtivo === user}">{{ user }}</a></li>
+				<li ng-repeat="user in list">
+					<a ng-click="selContato(user)" ng-class="{'ativo': contatoAtivo === user}">{{ user }}
+					<span class="badge" ng-show="conversas[user].unread">{{conversas[user].unread}}</span>
+					</a>
+				</li>
 			</ul>
 		</aside>
 		<content>
 			<div class="msg">
-				<p ng-repeat="msg in conversas[contatoAtivo]" class="{{msg.quem}}">{{msg.text}}</p>
+				<p ng-repeat="msg in conversas[contatoAtivo].msgs" class="{{msg.quem}}">{{msg.text}}</p>
 			</div>
-			<textarea ng-model="chatMsg[$scope.contatoAtivo]" cols="80" rows="5"></textarea>
-			<button ng-click="enviaMsg()">Enviar</button>
+			<textarea  ng-disabled="!contatoAtivo" ng-model="chatMsg" cols="80" rows="5"></textarea>
+			<button  ng-disabled="!contatoAtivo || !chatMsg" ng-click="enviaMsg()">Enviar</button>
+			<button ng-click="call(contatoAtivo)" ng-disabled="!contatoAtivo" ng-hide="isInCall || peer">Ligar</button>
+			<button ng-click="desligar()" ng-show="isInCall || peer">Desligar</button>
+			<button ng-click="atender()" ng-show="peer && !isCaller">Atender</button>
 		</content>
 	</section>
 </div>

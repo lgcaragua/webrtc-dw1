@@ -29,28 +29,26 @@ app.controller('mainCtrl', ['$scope', '$state', function($scope, $state) {
 
 app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	var socket = io();
+	var msgAudio = new Audio('audio/msg.mp3');
 	//$scope.list = ['Rogério', 'Gustavo', 'Noboru San', 'Adalberto', 'Kellen'];
 	$scope.list = []
-	$scope.conversas = {};
-	$scope.list.forEach( function (contato) {
-		$scope.conversas[contato] = [
-			{text:'Oi tudo bem ? aqui é o '+contato, quem:'remote'}
-		];
-	});		
+	$scope.conversas = {};	
 	
 	$scope.selContato = function(contato) {
 		$scope.contatoAtivo = contato;
+		$scope.chatMsg = "";
+		if ($scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo].unread = 0;
 	};
 	
 	$scope.enviaMsg = function() {
-		if (!$scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo] = [];		
-		$scope.conversas[$scope.contatoAtivo].push({text:$scope.chatMsg[$scope.contatoAtivo], quem:'self'});
+		if (!$scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo] = {msgs:[]};		
+		$scope.conversas[$scope.contatoAtivo].msgs.push({text:$scope.chatMsg, quem:'self'});
 		socket.emit('chat', JSON.stringify({
 			de:$scope.userLogin,
 			para:$scope.contatoAtivo,
-			text:$scope.chatMsg[$scope.contatoAtivo]
+			text:$scope.chatMsg
 		}));
-		$scope.chatMsg[$scope.contatoAtivo] = "";				
+		$scope.chatMsg = "";				
 	};			
 	//$scope.usuario = {};	
 	$scope.peer = null;		
@@ -69,8 +67,11 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	
 	socket.on('chat', function(data) {
 		var msg = JSON.parse(data);
-		if (!$scope.conversas[msg.de]) $scope.conversas[msg.de] = {};
-		$scope.conversas[msg.de].push({text:msg.text,quem:'remote'});
+		if (!$scope.conversas[msg.de]) $scope.conversas[msg.de] = {msgs: []};
+		$scope.conversas[msg.de].msgs.push({text:msg.text,quem:'remote'});
+		if ($scope.contatoAtivo !== msg.de)
+			$scope.conversas[msg.de].unread ? $scope.conversas[msg.de].unread++ : $scope.conversas[msg.de].unread = 1;
+		msgAudio.play();
 		$scope.$apply();
 	});
 	
@@ -115,17 +116,15 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	
 	$scope.atender = function() {
 		iniciaConversa();	
-		$scope.callMsg = "Conectando...";	
-		$scope.btnAtender = false;
+		$scope.callMsg = "Conectando...";			
 	};
 	
 	$scope.desligar = function() {
 		if (pc.iceConnectionState !== 'closed')		
 			pc.close();
 			socket.emit('chamada', JSON.stringify({para: $scope.peer, bye:true, dados: {de:$scope.usuario.nome}}));	
-			isInCall = false;
-			isCaller = false;				
-			$scope.go('list.html');							
+			$scope.isInCall = false;
+			$scope.isCaller = false;														
 	};
 	
 	function setAudio(audio) {
@@ -148,12 +147,12 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		if (chamada.bye) {
 			console.log("Chamada desligada pelo peer remoto");
 			pc.close();	
-			isInCall = false;
-			isCaller = false;				
+			$scope.isInCall = false;
+			$scope.isCaller = false;				
 			$scope.go('list.html');	
 			$scope.$apply();
 		}
-		//			if (isInCall && !isCaller) {
+		//			if ($scope.$scope.isInCall && !$scope.isCaller) {
 		//				socket.emit("chamada",
 		//				JSON.stringify({
 		//						para:chamada.dados.de, 
@@ -164,14 +163,13 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		//				return;
 		//			}
 		if (chamada.dados.oferta) {
-			if (!isInCall) {
+			if (!$scope.isInCall) {
 				ofertaRecebida = chamada.dados.oferta;
 				$scope.peer = chamada.dados.de;
 				$scope.recebendo = true;
-				setCallMsg("Recebendo chamada de " + $scope.peer);
-				$scope.go('call.html');
+				setCallMsg("Recebendo chamada de " + $scope.peer);				
 				setAudio("audio/ring.mp3");
-				isInCall = true;
+				$scope.isInCall = true;
 				$scope.btnAtender = true;
 				$scope.$apply();
 			}
@@ -180,16 +178,16 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 				new window.RTCSessionDescription(chamada.dados.resposta),
 				function () {
 					setCallMsg("Em chamada com " + $scope.peer);
-					isInCall = true;
+					$scope.isInCall = true;
 
 				},
 				function (error) {
 					console.log("Falha na conexão: " + error);
 					if (pc.iceConnectionState !== 'connected') {
 						$scope.peer = null;
-						isInCall = false;
+						$scope.isInCall = false;
 						$scope.recebendod = false;
-						isCaller = false;
+						$scope.isCaller = false;
 						$scope.go('list.html');
 					}
 				}
@@ -213,8 +211,8 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	]};
 	var pc = null;
 	
-	var isCaller = false;
-	var isInCall = false;
+	$scope.isCaller = false;
+	$scope.isInCall = false;
 	var ofertaRecebida = null;
 	var mediaStream = null;
 	
@@ -251,7 +249,7 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 			}
 		};
 		
-		if (isCaller) {
+		if ($scope.isCaller) {
 			//Chamar createOffer() irá executar o processo ICE			
 			pc.createOffer(function (offerSDP) {
 	   			pc.setLocalDescription(new window.RTCSessionDescription(offerSDP),
@@ -304,9 +302,8 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		console.log(evt);
 		var connState = evt.target.iceConnectionState;
 		if (connState == 'closed') {
-			isInCall = false;
-			isCaller = false;				
-			$scope.go('list.html');	
+			$scope.isInCall = false;
+			$scope.isCaller = false;				
 		}
 	}
 		
@@ -317,7 +314,7 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 				console.log("Busca ICE completa, enviando SDP para peer remoto:");
 				console.log(evt.target);
 				
-				if (isCaller) {
+				if ($scope.isCaller) {
 					var oferta = { "de": $scope.usuario.nome, "oferta": pc.localDescription };
 					socket.emit("chamada", JSON.stringify({ "para": $scope.peer, "dados": oferta }));
 				} else {
@@ -338,19 +335,16 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	function getMediaError(err) {
 		console.log('Falha ao capturar audio!');
 		console.log(err);
-		isCaller = false;
-		isInCall = false;
+		$scope.isCaller = false;
+		$scope.isInCall = false;
 		$scope.peer = null;
-		$scope.$apply(function() {
-			$scope.go('mediaError.html');
-			}
-		);
+		alert("Falha ao obter acesso ao microfone!");		
 		return;
 	}		
 		
 	$scope.call = function(quem) {
 		$scope.peer = quem;
-		isCaller = true;		
+		$scope.isCaller = true;		
 		$scope.callMsg = "Ligando para "+$scope.peer;				
 		$scope.go('call.html');
 		setAudio("audio/call.mp3");		
@@ -359,7 +353,7 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	};
 	
 	function iniciaConversa() {
-		getMediaSuccess(mediaStream)
+		navigator.getUserMedia(constraints, getMediaSuccess, getMediaError);		
 		//navigator.getUserMedia(constraints, getMediaSuccess, getMediaError);		
 	}
 	
