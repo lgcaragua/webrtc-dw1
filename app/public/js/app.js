@@ -24,7 +24,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 app.controller('mainCtrl', ['$scope', '$state', function($scope, $state) {
-	$state.go('home');
+	$state.go('tecnologia');
 }]);
 
 app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {

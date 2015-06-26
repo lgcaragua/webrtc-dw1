@@ -130,6 +130,10 @@ Chat
 		background-color: #999;
 	}
 
+	.login form input, .login form button{
+		padding: 10px;
+	}
+
 	.chat content {
 		border-left: solid 1px #FFF;
 		padding-left: 10px;
