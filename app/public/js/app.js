@@ -1,6 +1,19 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts"/>
-var app = angular.module('webrtc', ['ngAnimate']);
-app.controller('mainCtrl', ['$scope', function($scope) {
+var app = angular.module('webrtc', ['ui.router', 'ngAnimate']);
+
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+	$stateProvider
+	.state('home', {
+		url: '/',
+		templateUrl: 'views/home.html'
+	})
+	.state('chat', {
+		url: '/chat/',
+		templateUrl: 'views/chat.html'
+	});
+}]);
+
+app.controller('mainCtrl', ['$scope','$state', function($scope, $state) {	
 	$scope.usuario = {};
 	$scope.peer = null;		
 	var viewPath = 'views/';
@@ -158,10 +171,12 @@ app.controller('mainCtrl', ['$scope', function($scope) {
 	var isInCall = false;
 	var ofertaRecebida = null;
 	var mediaStream = null;
-	navigator.getUserMedia(constraints, 
-		function(stream) {
-			mediaStream = stream;
-		}, getMediaError);
+	
+	
+	// navigator.getUserMedia(constraints, 
+	// 	function(stream) {
+	// 		mediaStream = stream;
+	// 	}, getMediaError);
 	
 	//var pc = null;
 	
