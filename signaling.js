@@ -26,6 +26,10 @@ function signaling(server) {
 			  socket.emit('entrar',JSON.stringify({"error":"Usuario "+msg+" já existe!"}));			  			  
 			  return;
 		  }
+		  if (msg === "") {
+			  socket.emit('entrar', JSON.stringify({"error":"Nome de usuário não pode ser vazio!"}));
+			  return;
+		  }
 	    console.log(msg+' entrou');		
 		users[msg] = {"socket": socket};	    
 	    socket.emit('entrar' , JSON.stringify({"nomeLogado":msg}));	
@@ -33,6 +37,12 @@ function signaling(server) {
 	    io.emit('lista', JSON.stringify(Object.keys(users)));
 	  });
 	  
+	  socket.on('chat', function(data) {
+		 var msg = JSON.parse(data); 
+		 if (users[msg.para]) {
+			 users[msg.para].socket.emit('chat', data);			 
+		 }
+	  });
 	  socket.on('chamada', function(msg) {
 		  var chamada = JSON.parse(msg);
 		  console.log(chamada);

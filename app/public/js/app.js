@@ -28,7 +28,9 @@ app.controller('mainCtrl', ['$scope', '$state', function($scope, $state) {
 }]);
 
 app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
-	$scope.list = ['Rogério', 'Gustavo', 'Noboru San', 'Adalberto', 'Kellen'];
+	var socket = io();
+	//$scope.list = ['Rogério', 'Gustavo', 'Noboru San', 'Adalberto', 'Kellen'];
+	$scope.list = []
 	$scope.conversas = {};
 	$scope.list.forEach( function (contato) {
 		$scope.conversas[contato] = [
@@ -40,11 +42,17 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		$scope.contatoAtivo = contato;
 	};
 	
-	$scope.enviaMsg = function() {		
-		$scope.conversas[$scope.contatoAtivo].push({text:$scope.chatMsg, quem:'self'});
-		$scope.chatMsg = "";				
+	$scope.enviaMsg = function() {
+		if (!$scope.conversas[$scope.contatoAtivo]) $scope.conversas[$scope.contatoAtivo] = [];		
+		$scope.conversas[$scope.contatoAtivo].push({text:$scope.chatMsg[$scope.contatoAtivo], quem:'self'});
+		socket.emit('chat', JSON.stringify({
+			de:$scope.userLogin,
+			para:$scope.contatoAtivo,
+			text:$scope.chatMsg[$scope.contatoAtivo]
+		}));
+		$scope.chatMsg[$scope.contatoAtivo] = "";				
 	};			
-	$scope.usuario = {};	
+	//$scope.usuario = {};	
 	$scope.peer = null;		
 	var viewPath = 'views/';
 	$scope.route =  viewPath+'login.html';
@@ -57,14 +65,22 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 		$scope.error = msg;
 	};
 		
-	var socket = io();
+	
+	
+	socket.on('chat', function(data) {
+		var msg = JSON.parse(data);
+		if (!$scope.conversas[msg.de]) $scope.conversas[msg.de] = {};
+		$scope.conversas[msg.de].push({text:msg.text,quem:'remote'});
+		$scope.$apply();
+	});
 	
 	socket.on('entrar', function(data) {
 		var msg = JSON.parse(data);	
 		if (msg.error) {
-			$scope.error = msg.error;			
+			$scope.loginError = msg.error;			
 		} else {					
-			$scope.go('list.html');
+			$scope.loginError = "";
+			$scope.usuario = {nome:msg.nomeLogado};			
 		}
 	});		
 	
@@ -75,7 +91,7 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	
 	socket.on('lista', function(data) {
 		var lista = JSON.parse(data);
-		var i = lista.indexOf($scope.usuario.nome);
+		var i = lista.indexOf($scope.userLogin);
 		lista.splice(i,i+1);
 		$scope.list = lista;
 		$scope.$apply();
@@ -84,7 +100,7 @@ app.controller('chatCtrl', ['$scope','$state', function($scope, $state) {
 	
 	
 	$scope.login = function() {		
-		socket.emit('entrar', $scope.usuario.nome);		
+		socket.emit('entrar', $scope.userLogin);		
 	};
 	
 	$scope.logout = function() {		
