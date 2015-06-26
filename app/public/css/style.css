@@ -128,6 +128,21 @@ Container
 .container p{
 	text-align:justify;
 }
+.container a{
+	color: #990000;
+}
+
+.container .tec img{
+	float: right;
+	width: 50%;
+	max-width: 400px;
+	margin-left: 10px;
+}
+.container .tec img.esq{
+	float: left;
+	margin-right: 10px;
+}
+
 /* ---------------------------------------------------
 Footer
 ----------------------------------------------------- */
@@ -201,7 +216,8 @@ Media Queries
 		color: #CC7A00;
 		font-size: 1.25em;
 	}
-	a:hover{
+	
+	nav a:hover{
 		color:#F9AD0F;
 	}
 /*header*/	
@@ -242,6 +258,9 @@ Media Queries
 	.container p{
 		font-size: 0.7777777778em;
 		line-height: 1.1428571428em;
+	}
+	.container a{
+		color: #CC7A00;
 	}
 }
 
@@ -319,6 +338,9 @@ Media Queries
 		font-size: 0.7777777778em;
 		line-height: 1.1428571428em;
 		padding: 2.9166666667%;
+	}
+	.container a{
+		color: #195043;
 	}
 /*footer*/
 	.copyright{

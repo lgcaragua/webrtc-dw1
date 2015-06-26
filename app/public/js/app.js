@@ -14,6 +14,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	.state('tecnologia', {
 		url: '/tecnologia/',
 		templateUrl: 'views/tecnologia.html'
+	})
+	.state('quemsomos', {
+		url: '/quemsomos/',
+		templateUrl: 'views/quemsomos.html'
 	});
 }]);
 
