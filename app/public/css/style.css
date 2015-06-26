@@ -3,24 +3,24 @@ Parametros Gerais
 ----------------------------------------------------- */
 body{
 	background: #f1f1f1;
-	color: #868686; 
+	color: #191919; 
 	font-family: "Open Sans", Helvetica, sans-serif, arial; 
 	font-size: 18px;
 	font-weight: 300;
 	line-height: 1.2222222222em;
 	text-align: left; 
-	text-shadow: 1px 1px 0px #fff; 
 }
 
-h1, h2{
-	color: #FE5E41;
+h1{
+	color: #E62E00;
 	font-size: 3.3333333333em;
-	font-weight: 800;
+	font-weight: 600;
 	letter-spacing: -0.05em;
 	line-height: 1em;
 	margin: 20px 0 15px 0;
 }
-h3{
+
+h2{
 	font-size: 1.7777777778em;
 	font-weight: 300;
 	letter-spacing: -0.0625em;
@@ -31,15 +31,16 @@ p{
 	font-weight: 300;
 	letter-spacing: -0.05555555556em;
 }
+
 a, a:link, a:visited{
 	color:#FE9380; 
 	font-weight:400; 
 	text-decoration:none;
 }
 a:hover{
-	color:#FE5E41;
-	text-decoration:underline;
-	text-shadow:none; 
+	color: #E62E00;
+	text-decoration: underline;
+
 }
 
 /* ---------------------------------------------------
@@ -56,13 +57,15 @@ header- cabecalho da pagina
 		float: right;
 		margin-top: 50px; 
 		text-align: right; 
-		width: 41.6666666666667%;
+		border: solid 1px;
+		width: 100%;
 	}
 	nav ul{
-		list-style-type:none; 
+		list-style-type: none; 
 	}
 	nav li {
 		display: inline; 
+
 	}
 	nav ul li a{
 		margin-right: 2.5%;
@@ -87,13 +90,19 @@ Chamada
 	text-align:center;
 	width:100%;
 }
-h2 span{
+h1{
+	white-space: nowrap;
+	
+}
+h1 span{
 	font-size: 1em;
 	font-weight: 300;
 	letter-spacing: -0.0333333333em;
 	line-height: 1em;
+	
 }
-.chamada h3 {
+.chamada h2 {
+	color: #868686;
 	margin: 0 auto;
 	width: 75%;
 }
@@ -102,13 +111,14 @@ h2 span{
 Container
 ----------------------------------------------------- */
 .container{
-	background-color: #FE9481;
-	height: 417px;
+	background-color: #F8C0B2;
+
 	padding: 2.5%;
 	width: 95%;
-	border: solid 1px;
+	border: 1px solid #E0E0E0; 
+
 }
-.container h3{
+.container h2{
 	color:#fff;
 	font-size: 1.77777777778em;
 	font-weight: 300;
@@ -138,40 +148,41 @@ Media Queries
 ----------------------------------------------------- */
 /*  1200px */
 @media screen and (max-width: 1200px){
-	.chamada h3 {
+	h1{
+		font-size:2.6666666667em;
+		margin: 20px 0 15px 0;
+	}
+	.chamada h2 {
 		font-size: 1.66666666667em;
 	}
-	.container h3{
+	.container h2{
 		font-size: 1.55555555556em;
 	}
-	.container p{
-
-	}
+	
 }
 /* 960px */
 @media screen and (max-width:960px){
 	nav{
 		width:62.5%;
 	}
-	h2{
+	h1{
 		font-size:2.6666666667em;
 		margin: 20px 0 15px 0;
 	}
 /*.chamada*/
 	.chamada {
-		height: 120px;
+		height: 150px;
 	}
-	.chamada h3{
+	.chamada h2{
 		font-size:1.5em;
 		width:88.54166666666667%;
 	}
 /*.container*/
 	.container{
-		height: 425px;
 		padding: 3.125%;
 		width: 93.75%;
 	}
-	.container h3{
+	.container h2{
 		font-size: 1.6666666667em;
 	}
 	.container p{
@@ -181,8 +192,8 @@ Media Queries
 }
 /* 768px */
 @media screen and (max-width:768px){
-/*cores dos links e H2*/
-	h2, a, a:link, a:visited{
+/*cores dos links e h1*/
+	h1, a, a:link, a:visited{
 		color:#FBCA61; 
 	}	
 	a:hover{
@@ -203,30 +214,26 @@ Media Queries
 	}
 /*.chamada*/
 	.chamada{
-		height:100px;
+		height: 120px;
 	}
-	h2 {
+	h1 {
 		font-size: 2.2222222222em;
 	}
-	.chamada h3{
+	.chamada h2{
 		font-size:1.1111111111em; 
 	}
 /*.container*/
 	.container{
-		background-color:#FCDA92;
-		height: 380px;
-		padding:3.90625%;
-		width:92.1875%;
+		background-color: #FCDA92;
+		padding: 3.90625%;
+		width: 92.1875%;
 	}
-	.container h3{
+	.container h2{
 		font-size: 1.6666666667em;
 	}
 	.container p{
 		font-size: 0.7777777778em;
-		height:140px;
 		line-height: 1.1428571428em;
-		padding: 2.9166666667%;
-		top: 215px;
 	}
 }
 
@@ -237,12 +244,9 @@ Media Queries
 		margin:0;
 		padding:0;
 	}
-/*cores dos links e H2*/
-	h2, a, a:link, a:visited{
-		color: #9C8CB9; 
-	}
-	a:hover{
-		color:#745F9A;
+/*cores dos links e h1*/
+	h1 {
+		color: #246B47; 
 	}
 /*header*/	
 	header {
@@ -255,7 +259,8 @@ Media Queries
 		clear:both;
 	}
 	nav li {
-		background-color: #9C8CB9;
+		background-color: #70B894;
+		border-bottom: solid 1px #FAFAFA;
 		display:block;
 	}
 	nav ul li a{
@@ -271,32 +276,37 @@ Media Queries
 		font-size:1.3888888889em;
 	}
 	nav li a.ativo:link, nav li a:hover, nav li a:visited {
-		background-color:#745F9A; 
+		background-color: #0B2015;
 		color:#fff;
 		text-decoration:none;
 	}
 	nav li a.ativo:hover, nav li a.ativo:visited{
-	 background-color: #9C8CB9;
+		background-color: #0B2015;
 	}
 /*.chamada*/
 	.chamada{
-		height:130px;
+		height:80px;
 		margin-top:25px;
 	}
-	h2 {
+	h1 {
 		font-size: 1.4444444444em;
-		letter-spacing:-0.0769230769230769em;
+		letter-spacing: -0.0769230769230769em;
 		margin-bottom: 15px;
 	}
-	.chamada h3{
-		font-size:0.7777777778em;
+	.chamada h2{
+		font-size: 0.7777777778em;
 	}
 /*.container*/
 	.container{	
-		background-color:#9C8CB9;
+		background-color: #70B894;
 		margin:0;
 		padding:0;
 		width:100%;
+	}
+	.container p{
+		font-size: 0.7777777778em;
+		line-height: 1.1428571428em;
+		padding: 2.9166666667%;
 	}
 /*footer*/
 	.copyright{
